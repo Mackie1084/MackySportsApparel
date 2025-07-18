@@ -1,5 +1,5 @@
   * {
-      margin: 0; /*It removes outer spacing on each element*/
+      margin:0; /*It removes outer spacing on each element*/
       padding: 0;
       box-sizing: border-box;
     }
