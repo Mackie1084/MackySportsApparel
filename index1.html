@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive Hamburger Menu with Sub-Menu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header and Navigation */
+    .header {
+      background-color: #333;
+      padding: 15px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
+    nav {
+      background-color: #333;
+    }
+
+    .menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 20px;
+      display: block;
+    }
+
+    .menu a:hover {
+      background-color: #444;
+    }
+
+    /* Submenu (Dropdown) */
+    .submenu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #444;
+      min-width: 180px;
+      display: none;
+      flex-direction: column;
+    }
+
+    .submenu a {
+      padding: 10px 20px;
+    }
+
+    .menu li:hover .submenu {
+      display: flex;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .menu {
+        flex-direction: column;
+        display: none;
+        width: 100%;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu li {
+        width: 100%;
+      }
+
+      .submenu {
+        position: static;
+        display: none;
+      }
+
+      .menu li.show-submenu .submenu {
+        display: flex;
+      }
+
+      .menu a.dropdown-toggle::after {
+        content: " ▾";
+        float: right;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">MySite</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav>
+    <ul class="menu" id="mainMenu">
+      <li><a href="#">Home</a></li>
+      <li>
+        <a href="#" class="dropdown-toggle" onclick="toggleSubMenu(event)">Services</a>
+        <ul class="submenu">
+          <li><a href="#">Web Design</a></li>
+          <li><a href="#">SEO</a></li>
+          <li><a href="#">Consulting</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="dropdown-toggle" onclick="toggleSubMenu(event)">Products</a>
+        <ul class="submenu">
+          <li><a href="#">Courses</a></li>
+          <li><a href="#">Ebooks</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <script>
+    // Toggle full menu
+    function toggleMenu() {
+      document.getElementById('mainMenu').classList.toggle('active');
+    }
+
+    // Toggle submenu on mobile
+    function toggleSubMenu(e) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault(); // prevent navigation
+        const parentLi = e.target.parentElement;
+        parentLi.classList.toggle('show-submenu');
+      }
+    }
+  </script>
+
+</body>
+</html>
